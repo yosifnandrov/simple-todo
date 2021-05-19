@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos!</title>
+</head>
+<body>
+<h1>TODO List</h1>
+<ul>
+{% if todos %}
+    {% for todo in todos %}
+        <a href="{% url 'check' todo.id %}">
+            {% if todo.check %}
+                DONE
+            {% else %}
+                Not Done
+            {% endif %}
+        </a>
+        <li>
+            <p>{{ todo.title }}</p>
+        </li>
+        <li>
+            <p>{{ todo.description }}</p>
+        </li>
+        <li>
+            <p>{{ todo.time }}</p>
+        </li>
+        <p>
+            <a href="{% url 'delete' todo.id%}">Delete</a>
+            <a href="{% url 'edit' todo.id %}">Edit</a>
+        </p>
+
+
+    {% endfor %}
+{% else %}
+    <h2>Nothing added yet!</h2>
+{% endif %}
+</ul>
+<p><a href="{% url 'create' %}">Add todo</a></p>
+
+</body>
+</html>
